@@ -1,5 +1,6 @@
 using SpaceRent.Entities;
 using SpaceRent.Repositories;
+using SpaceRent.Subscribers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddScoped<ITenantRepository, TenantRepository>();
 builder.Services.AddSingleton<Booking, Booking>();
+builder.Services.AddSingleton<DateBlocker, DateBlocker>();
+builder.Services.AddSingleton<OwnerNotifier, OwnerNotifier>();
 
 var app = builder.Build();
+
+app.Services.GetRequiredService<DateBlocker>();
+app.Services.GetRequiredService<OwnerNotifier>();
 
 if (app.Environment.IsDevelopment())
 {
