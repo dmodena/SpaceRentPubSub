@@ -1,6 +1,9 @@
+using System.Runtime.CompilerServices;
 using SpaceRent.Entities;
 using SpaceRent.Repositories;
 using SpaceRent.Subscribers;
+
+[assembly: InternalsVisibleTo("SpaceRentTests")]
 
 var builder = WebApplication.CreateBuilder(args);
 
